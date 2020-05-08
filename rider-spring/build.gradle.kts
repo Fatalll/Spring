@@ -18,6 +18,7 @@ buildscript {
 }
 
 plugins {
+    id("antlr")
     id("org.jetbrains.intellij") version "0.4.7"
 }
 
@@ -77,7 +78,9 @@ val repoRoot = projectDir.parentFile!!
 val resharperPluginPath = File(repoRoot, "Spring")
 val buildConfiguration = ext.properties["BuildConfiguration"] ?: "Debug"
 
-val libFiles = listOf<String>()
+val libFiles = listOf<String>(
+        "Spring/bin/$buildConfiguration/net461/Antlr4.Runtime.Standard.dll"
+)
 
 val pluginFiles = listOf(
         "Spring/bin/$buildConfiguration/net461/JetBrains.ReSharper.Plugins.Spring")
@@ -258,5 +261,6 @@ defaultTasks("prepare")
 
 // workaround for https://youtrack.jetbrains.com/issue/RIDER-18697
 dependencies {
+    antlr("org.antlr:antlr4:4.8")
     testCompile("xalan", "xalan", "2.7.2")
 }

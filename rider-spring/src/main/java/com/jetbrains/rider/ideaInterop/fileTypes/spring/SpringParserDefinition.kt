@@ -16,4 +16,5 @@ class SpringParserDefinition : RiderParserDefinitionBase(SpringFileElementType, 
 
     override fun createLexer(project: Project?): Lexer = RiderDummyLexer(SpringLanguage)
     override fun getFileNodeType(): IFileElementType = SpringFileElementType
+
 }

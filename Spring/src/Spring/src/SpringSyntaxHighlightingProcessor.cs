@@ -17,14 +17,19 @@ namespace JetBrains.ReSharper.Plugins.Spring
     
     class SpringSyntaxHighlightingProcessor : SyntaxHighlightingProcessor
     {
+        protected override bool IsPreprocessor(TokenNodeType tokenType)
+        {
+            return base.IsPreprocessor(tokenType);
+        }
+
         protected override bool IsBlockComment(TokenNodeType tokenType)
         {
-            return base.IsBlockComment(tokenType);
+            return tokenType == SpringTokenType.BlockComment;
         }
 
         protected override bool IsLineComment(TokenNodeType tokenType)
         {
-            return base.IsLineComment(tokenType);
+            return tokenType == SpringTokenType.LineComment;
         }
 
         protected override bool IsString(TokenNodeType tokenType)
@@ -39,7 +44,7 @@ namespace JetBrains.ReSharper.Plugins.Spring
 
         protected override bool IsKeyword(TokenNodeType tokenType)
         {
-            return base.IsKeyword(tokenType) || tokenType.IsConstantLiteral;
+            return base.IsKeyword(tokenType);
         }
     }
 }
